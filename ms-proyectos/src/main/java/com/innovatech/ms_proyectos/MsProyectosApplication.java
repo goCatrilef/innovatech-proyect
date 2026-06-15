@@ -1,4 +1,4 @@
-package cl.innovatech.ms_proyectos;
+package com.innovatech.ms_proyectos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

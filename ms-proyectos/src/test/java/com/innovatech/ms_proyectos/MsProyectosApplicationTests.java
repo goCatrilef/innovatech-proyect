@@ -1,4 +1,4 @@
-package cl.innovatech.ms_proyectos;
+package com.innovatech.ms_proyectos;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
