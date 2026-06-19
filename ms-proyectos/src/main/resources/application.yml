@@ -1,0 +1,49 @@
+server:
+    port: 8082
+
+spring:
+    application:
+        name: ms-proyectos
+
+    datasource:
+        url: jdbc:postgresql://localhost:5433/ms_proyectos_db
+        username: postgres
+        password: postgres
+        driver-class-name: org.postgresql.Driver
+
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        properties:
+            hibernate:
+                format_sql: true
+
+    jackson:
+        time-zone: America/Santiago
+        date-format: yyyy-MM-dd HH:mm:ss
+
+eureka:
+    client:
+        enabled: false
+        service-url:
+            defaultZone: http://localhost:8761/eureka
+    instance:
+        prefer-ip-address: true
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,info
+    endpoint:
+        health:
+            show-details: always
+
+springdoc:
+    api-docs:
+        enabled: true
+    swagger-ui:
+        enabled: true
+        path: /swagger-ui.html
