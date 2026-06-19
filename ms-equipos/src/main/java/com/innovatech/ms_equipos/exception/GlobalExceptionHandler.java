@@ -16,113 +16,120 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(RecursoNoEncontradoException.class)
-    public ResponseEntity<ErrorResponse> manejarRecursoNoEncontrado(
-            RecursoNoEncontradoException ex,
-            HttpServletRequest request
-    ) {
-        ErrorResponse error = ErrorResponse.builder()
-                .status(HttpStatus.NOT_FOUND.value())
-                .error(HttpStatus.NOT_FOUND.getReasonPhrase())
-                .message(ex.getMessage())
-                .path(request.getRequestURI())
-                .timestamp(LocalDateTime.now())
-                .build();
+        @ExceptionHandler(RecursoNoEncontradoException.class)
+        public ResponseEntity<ErrorResponse> manejarRecursoNoEncontrado(
+                        RecursoNoEncontradoException ex,
+                        HttpServletRequest request) {
+                ErrorResponse error = ErrorResponse.builder()
+                                .status(HttpStatus.NOT_FOUND.value())
+                                .error(HttpStatus.NOT_FOUND.getReasonPhrase())
+                                .message(ex.getMessage())
+                                .path(request.getRequestURI())
+                                .timestamp(LocalDateTime.now())
+                                .build();
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-    }
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
 
-    @ExceptionHandler(RecursoDuplicadoException.class)
-    public ResponseEntity<ErrorResponse> manejarRecursoDuplicado(
-            RecursoDuplicadoException ex,
-            HttpServletRequest request
-    ) {
-        ErrorResponse error = ErrorResponse.builder()
-                .status(HttpStatus.CONFLICT.value())
-                .error(HttpStatus.CONFLICT.getReasonPhrase())
-                .message(ex.getMessage())
-                .path(request.getRequestURI())
-                .timestamp(LocalDateTime.now())
-                .build();
+        @ExceptionHandler(RecursoDuplicadoException.class)
+        public ResponseEntity<ErrorResponse> manejarRecursoDuplicado(
+                        RecursoDuplicadoException ex,
+                        HttpServletRequest request) {
+                ErrorResponse error = ErrorResponse.builder()
+                                .status(HttpStatus.CONFLICT.value())
+                                .error(HttpStatus.CONFLICT.getReasonPhrase())
+                                .message(ex.getMessage())
+                                .path(request.getRequestURI())
+                                .timestamp(LocalDateTime.now())
+                                .build();
 
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
-    }
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+        }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> manejarErroresValidacion(
-            MethodArgumentNotValidException ex,
-            HttpServletRequest request
-    ) {
-        Map<String, String> errores = new HashMap<>();
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        public ResponseEntity<ErrorResponse> manejarErroresValidacion(
+                        MethodArgumentNotValidException ex,
+                        HttpServletRequest request) {
+                Map<String, String> errores = new HashMap<>();
 
-        ex.getBindingResult().getFieldErrors().forEach(error ->
-                errores.put(error.getField(), error.getDefaultMessage())
-        );
+                ex.getBindingResult().getFieldErrors()
+                                .forEach(error -> errores.put(error.getField(), error.getDefaultMessage()));
 
-        ErrorResponse response = ErrorResponse.builder()
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message("Error de validacion en los datos de entrada")
-                .path(request.getRequestURI())
-                .timestamp(LocalDateTime.now())
-                .validationErrors(errores)
-                .build();
+                ErrorResponse response = ErrorResponse.builder()
+                                .status(HttpStatus.BAD_REQUEST.value())
+                                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                                .message("Error de validacion en los datos de entrada")
+                                .path(request.getRequestURI())
+                                .timestamp(LocalDateTime.now())
+                                .validationErrors(errores)
+                                .build();
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-    }
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
 
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ErrorResponse> manejarCuerpoNoLegible(
-            HttpMessageNotReadableException ex,
-            HttpServletRequest request
-    ) {
-        ErrorResponse error = ErrorResponse.builder()
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message("El cuerpo de la solicitud es obligatorio y debe ser un JSON valido")
-                .path(request.getRequestURI())
-                .timestamp(LocalDateTime.now())
-                .build();
+        @ExceptionHandler(HttpMessageNotReadableException.class)
+        public ResponseEntity<ErrorResponse> manejarCuerpoNoLegible(
+                        HttpMessageNotReadableException ex,
+                        HttpServletRequest request) {
+                ErrorResponse error = ErrorResponse.builder()
+                                .status(HttpStatus.BAD_REQUEST.value())
+                                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                                .message("El cuerpo de la solicitud es obligatorio y debe ser un JSON valido")
+                                .path(request.getRequestURI())
+                                .timestamp(LocalDateTime.now())
+                                .build();
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
-    }
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ErrorResponse> manejarErroresParametros(
-            ConstraintViolationException ex,
-            HttpServletRequest request
-    ) {
-        Map<String, String> errores = new HashMap<>();
+        @ExceptionHandler(ConstraintViolationException.class)
+        public ResponseEntity<ErrorResponse> manejarErroresParametros(
+                        ConstraintViolationException ex,
+                        HttpServletRequest request) {
+                Map<String, String> errores = new HashMap<>();
 
-        ex.getConstraintViolations().forEach(error ->
-                errores.put(error.getPropertyPath().toString(), error.getMessage())
-        );
+                ex.getConstraintViolations()
+                                .forEach(error -> errores.put(error.getPropertyPath().toString(), error.getMessage()));
 
-        ErrorResponse response = ErrorResponse.builder()
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .message("Error de validacion en los parametros de la solicitud")
-                .path(request.getRequestURI())
-                .timestamp(LocalDateTime.now())
-                .validationErrors(errores)
-                .build();
+                ErrorResponse response = ErrorResponse.builder()
+                                .status(HttpStatus.BAD_REQUEST.value())
+                                .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                                .message("Error de validacion en los parametros de la solicitud")
+                                .path(request.getRequestURI())
+                                .timestamp(LocalDateTime.now())
+                                .validationErrors(errores)
+                                .build();
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-    }
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> manejarErrorGeneral(
-            Exception ex,
-            HttpServletRequest request
-    ) {
-        ErrorResponse error = ErrorResponse.builder()
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-                .message("Ocurrio un error interno en el servidor")
-                .path(request.getRequestURI())
-                .timestamp(LocalDateTime.now())
-                .build();
+        @ExceptionHandler(Exception.class)
+        public ResponseEntity<ErrorResponse> manejarErrorGeneral(
+                        Exception ex,
+                        HttpServletRequest request) {
+                ErrorResponse error = ErrorResponse.builder()
+                                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                                .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                                .message("Ocurrio un error interno en el servidor")
+                                .path(request.getRequestURI())
+                                .timestamp(LocalDateTime.now())
+                                .build();
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
-    }
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
+
+        @ExceptionHandler(IntegracionProyectoException.class)
+        public ResponseEntity<ErrorResponse> manejarErrorIntegracionProyecto(
+                        IntegracionProyectoException ex,
+                        HttpServletRequest request) {
+                ErrorResponse error = ErrorResponse.builder()
+                                .status(HttpStatus.SERVICE_UNAVAILABLE.value())
+                                .error(HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase())
+                                .message(ex.getMessage())
+                                .path(request.getRequestURI())
+                                .timestamp(LocalDateTime.now())
+                                .build();
+
+                return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(error);
+        }
 }
