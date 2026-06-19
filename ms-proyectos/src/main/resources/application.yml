@@ -1,10 +1,8 @@
 server:
     port: 8082
-
 spring:
     application:
         name: ms-proyectos
-
     datasource:
         url: jdbc:postgresql://localhost:5433/ms_proyectos_db
         username: postgres
