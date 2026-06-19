@@ -1,0 +1,49 @@
+### Registrar proyecto
+POST http://localhost:8082/api/proyectos
+Content-Type: application/json
+
+{
+    "codigo": "PRY-001",
+    "nombre": "Sistema de Gestión de Proyectos",
+    "descripcion": "Proyecto académico basado en microservicios",
+    "fechaInicio": "2026-06-17",
+    "fechaFin": "2026-12-20",
+    "estado": "PLANIFICADO"
+}
+
+### Listar proyectos
+GET http://localhost:8082/api/proyectos
+Accept: application/json
+
+### Obtener proyecto por ID
+GET http://localhost:8082/api/proyectos/1
+Accept: application/json
+
+### Actualizar proyecto
+PUT http://localhost:8082/api/proyectos/1
+Content-Type: application/json
+
+{
+    "codigo": "PRY-001",
+    "nombre": "Sistema de Gestión de Proyectos Innovatech",
+    "descripcion": "Proyecto actualizado",
+    "fechaInicio": "2026-06-17",
+    "fechaFin": "2026-12-20",
+    "estado": "EN_PROGRESO"
+}
+
+### Cambiar estado del proyecto
+PATCH http://localhost:8082/api/proyectos/1/estado
+Content-Type: application/json
+
+{
+    "estado": "FINALIZADO"
+}
+
+### Validar si existe proyecto
+GET http://localhost:8082/api/proyectos/1/existe
+Accept: application/json
+
+### Validar proyecto inexistente
+GET http://localhost:8082/api/proyectos/999/existe
+Accept: application/json
