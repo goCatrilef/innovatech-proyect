@@ -1,0 +1,74 @@
+### Buscar miembro por ID
+GET http://localhost:8081/api/equipos/miembros/1
+Accept: application/json
+
+
+### Buscar miembro por ID
+GET http://localhost:8081/api/equipos/miembros/2
+Accept: application/json
+
+### Registrar miembro duplicado
+POST http://localhost:8081/api/equipos/miembros
+Content-Type: application/json
+
+{
+    "identificador": "USR-001",
+    "nombre": "Gonzalo Perez",
+    "rol": "Desarrollador Backend",
+    "email": "gonzalo.perez@example.com",
+    "activo": true
+}
+
+### Registrar miembro inválido
+POST http://localhost:8081/api/equipos/miembros
+Content-Type: application/json
+
+{
+    "identificador": "",
+    "nombre": "",
+    "rol": "",
+    "email": "correo-no-valido",
+    "activo": true
+}
+
+### Actualizar miembro
+PUT http://localhost:8081/api/equipos/miembros/1
+Content-Type: application/json
+
+{
+    "identificador": "USR-001",
+    "nombre": "Gonzalo Perez",
+    "rol": "DevOps Junior",
+    "email": "gperez@innovatech.com",
+    "activo": true
+} 
+
+### Asignar miembro a proyecto
+POST http://localhost:8081/api/equipos/asignaciones
+Content-Type: application/json
+
+{
+    "miembroId": 1,
+    "proyectoId": 1
+}
+
+### Listar miembros asignados a un proyecto
+GET http://localhost:8081/api/equipos/proyectos/1/miembros
+Accept: application/json
+
+### Asignar miembro duplicado al mismo proyecto
+POST http://localhost:8081/api/equipos/asignaciones
+Content-Type: application/json
+
+{
+    "miembroId": 1,
+    "proyectoId": 1
+}
+
+### Desactivar miembro
+PATCH http://localhost:8081/api/equipos/miembros/1/desactivar
+Accept: application/json
+
+### Ver miembro desactivado
+GET http://localhost:8081/api/equipos/miembros/1
+Accept: application/json
