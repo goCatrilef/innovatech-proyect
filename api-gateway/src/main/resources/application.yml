@@ -1,0 +1,41 @@
+server:
+    port: 8080
+
+spring:
+    application:
+        name: api-gateway
+
+    cloud:
+        gateway:
+            routes:
+                - id: ms-equipos
+                  uri: lb://ms-equipos
+                  predicates:
+                      - Path=/api/equipos/**
+
+                - id: ms-proyectos
+                  uri: lb://ms-proyectos
+                  predicates:
+                      - Path=/api/proyectos/**
+
+                - id: ms-tareas
+                  uri: lb://ms-tareas
+                  predicates:
+                      - Path=/api/tareas/**
+
+eureka:
+    client:
+        enabled: true
+        service-url:
+            defaultZone: http://localhost:8761/eureka/
+    instance:
+        prefer-ip-address: true
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,info,gateway
+    endpoint:
+        health:
+            show-details: always
