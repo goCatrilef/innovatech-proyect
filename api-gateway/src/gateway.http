@@ -1,0 +1,14 @@
+### Health API Gateway
+GET http://localhost:8080/actuator/health
+
+### Proyectos por Gateway
+GET http://localhost:8080/api/proyectos
+Accept: application/json
+
+### Equipos por Gateway
+GET http://localhost:8080/api/equipos/miembros
+Accept: application/json
+
+### Tareas por Gateway
+GET http://localhost:8080/api/tareas/estado/PENDING
+Accept: application/json

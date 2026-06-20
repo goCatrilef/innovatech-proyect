@@ -7,21 +7,23 @@ spring:
 
     cloud:
         gateway:
-            routes:
-                - id: ms-equipos
-                  uri: lb://ms-equipos
-                  predicates:
-                      - Path=/api/equipos/**
+            server:
+                webmvc:
+                    routes:
+                        - id: ms-proyectos
+                          uri: lb://MS-PROYECTOS
+                          predicates:
+                              - Path=/api/proyectos,/api/proyectos/**
 
-                - id: ms-proyectos
-                  uri: lb://ms-proyectos
-                  predicates:
-                      - Path=/api/proyectos/**
+                        - id: ms-equipos
+                          uri: lb://MS-EQUIPOS
+                          predicates:
+                              - Path=/api/equipos,/api/equipos/**
 
-                - id: ms-tareas
-                  uri: lb://ms-tareas
-                  predicates:
-                      - Path=/api/tareas/**
+                        - id: ms-tareas
+                          uri: lb://MS-TAREAS
+                          predicates:
+                              - Path=/api/tareas,/api/tareas/**
 
 eureka:
     client:
