@@ -1,0 +1,61 @@
+### Crear tarea
+POST http://localhost:8083/api/tareas
+Content-Type: application/json
+
+{
+    "descripcion": "Implementar endpoint de creación de tareas",
+    "proyectoId": 2,
+    "responsableId": 1,
+    "estado": "PENDING"
+}
+
+### Obtener tarea por ID
+GET http://localhost:8083/api/tareas/1
+Accept: application/json
+
+### Consultar tareas por proyecto
+GET http://localhost:8083/api/tareas/proyecto/2
+Accept: application/json
+
+### Consultar tareas por estado
+GET http://localhost:8083/api/tareas/estado/IN_PROGRESS
+Accept: application/json
+
+### Consultar tareas por responsable
+GET http://localhost:8083/api/tareas/responsable/1
+Accept: application/json
+
+### Actualizar tarea
+PUT http://localhost:8083/api/tareas/1
+Content-Type: application/json
+
+{
+    "descripcion": "Crear endpoint REST para gestión de proyectos",
+    "proyectoId": 1,
+    "responsableId": 1,
+    "estado": "PENDING"
+}
+
+### Cambiar estado a IN_PROGRESS
+PATCH http://localhost:8083/api/tareas/2/estado
+Content-Type: application/json
+
+{
+    "estado": "PENDING"
+}
+
+### Cambiar estado a DONE
+PATCH http://localhost:8083/api/tareas/1/estado
+Content-Type: application/json
+
+{
+    "estado": "DONE"
+}
+
+### Asignar otro responsable
+PATCH http://localhost:8083/api/tareas/1/responsable
+Content-Type: application/json
+
+{
+    "responsableId": 2
+}
