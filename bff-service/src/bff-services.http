@@ -1,0 +1,3 @@
+### Resumen de proyecto desde BFF
+GET http://localhost:8090/api/bff/proyectos/1/resumen
+Accept: application/json
