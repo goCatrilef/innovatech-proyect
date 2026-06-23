@@ -9,9 +9,9 @@ type MetricCardProps = {
 
 function MetricCard({ label, value }: MetricCardProps) {
   return (
-    <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-      <p className="text-sm text-slate-500">{label}</p>
-      <p className="mt-1 text-3xl font-bold text-slate-950">{value}</p>
+    <article className="rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+      <p className="text-sm text-neutral-500">{label}</p>
+      <p className="mt-1 text-3xl font-bold text-neutral-900">{value}</p>
     </article>
   );
 }
@@ -40,13 +40,13 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      <section className="rounded-xl border border-neutral-200 bg-white p-6 shadow-card">
         <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-cyan-600">
+            <p className="text-sm font-semibold uppercase tracking-wide text-accent-600">
               Conexión inicial
             </p>
-            <p className="mt-2 text-slate-500">
+            <p className="mt-2 text-neutral-500">
               Valida que el frontend pueda consultar el resumen desde el BFF.
             </p>
           </div>
@@ -57,27 +57,27 @@ export function DashboardPage() {
             type="button"
             onClick={loadSummary}
             disabled={isLoading}
-            className="rounded-lg bg-cyan-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
+            className="rounded-lg bg-primary-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isLoading ? "Cargando..." : "Cargar resumen del proyecto"}
           </button>
 
-          {error && <p className="text-sm font-medium text-red-600">{error}</p>}
+          {error && <p className="text-sm font-medium text-danger-600">{error}</p>}
         </div>
 
         {summary ? (
-          <section className="mt-8 rounded-xl border border-slate-200 p-6">
+          <section className="mt-8 rounded-xl border border-neutral-200 p-6">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <h2 className="text-xl font-bold text-slate-950">
+                <h2 className="text-xl font-bold text-neutral-900">
                   {summary.proyecto.nombre}
                 </h2>
-                <p className="mt-1 text-slate-600">
+                <p className="mt-1 text-neutral-500">
                   Código: {summary.proyecto.codigo}
                 </p>
               </div>
 
-              <span className="w-fit rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-800">
+              <span className="w-fit rounded-full bg-accent-100 px-3 py-1 text-xs font-semibold text-accent-600">
                 {summary.proyecto.estado}
               </span>
             </div>
@@ -99,11 +99,11 @@ export function DashboardPage() {
             </div>
           </section>
         ) : (
-          <section className="mt-8 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
-            <h2 className="text-lg font-semibold text-slate-800">
+          <section className="mt-8 rounded-xl border border-dashed border-neutral-300 bg-neutral-50 p-8 text-center">
+            <h2 className="text-lg font-semibold text-neutral-700">
               Aún no hay datos cargados
             </h2>
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="mt-2 text-sm text-neutral-500">
               Usa el botón para validar la conexión entre frontend, Keycloak y
               BFF.
             </p>

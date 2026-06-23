@@ -25,19 +25,19 @@ const taskColumns: TaskColumn[] = [
     status: "PENDING",
     title: "Pendientes",
     description: "Tareas planificadas para iniciar.",
-    accentClassName: "border-t-slate-400",
+    accentClassName: "border-t-neutral-500",
   },
   {
     status: "IN_PROGRESS",
     title: "En progreso",
     description: "Trabajo activo del equipo.",
-    accentClassName: "border-t-cyan-400",
+    accentClassName: "border-t-accent-500",
   },
   {
     status: "DONE",
     title: "Finalizadas",
     description: "Tareas completadas.",
-    accentClassName: "border-t-emerald-400",
+    accentClassName: "border-t-success-600",
   },
 ];
 
@@ -230,13 +230,13 @@ export function TasksPage() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+      <section className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h2 className="text-xl font-bold text-slate-950">
+            <h2 className="text-xl font-bold text-neutral-900">
               Tablero por proyecto
             </h2>
-            <p className="mt-1 text-sm text-slate-500">
+            <p className="mt-1 text-sm text-neutral-500">
               Las tareas se cargan desde el BFF y se agrupan por estado.
             </p>
           </div>
@@ -244,7 +244,7 @@ export function TasksPage() {
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
             <label
               htmlFor="project-selector"
-              className="text-sm font-semibold text-slate-700"
+              className="text-sm font-semibold text-neutral-700"
             >
               Proyecto
             </label>
@@ -255,7 +255,7 @@ export function TasksPage() {
                 setSelectedProjectId(Number(event.target.value))
               }
               disabled={isLoadingProjects || projects.length === 0}
-              className="h-10 min-w-72 rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 disabled:cursor-not-allowed disabled:opacity-60"
+              className="h-10 min-w-72 rounded-lg border border-neutral-200 bg-white px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {projects.length === 0 ? (
                 <option value="">Sin proyectos disponibles</option>
@@ -271,9 +271,9 @@ export function TasksPage() {
         </div>
 
         {selectedProject && (
-          <div className="mt-4 rounded-lg bg-slate-50 p-4 text-sm text-slate-600">
+          <div className="mt-4 rounded-lg bg-neutral-50 p-4 text-sm text-neutral-500">
             Mostrando tareas de{" "}
-            <span className="font-semibold text-slate-950">
+            <span className="font-semibold text-neutral-900">
               {selectedProject.nombre}
             </span>
             .
@@ -281,7 +281,7 @@ export function TasksPage() {
         )}
 
         {error && (
-          <div className="mt-4 rounded-lg border border-red-100 bg-red-50 p-4 text-sm text-red-700">
+          <div className="mt-4 rounded-lg border border-danger-100 bg-danger-50 p-4 text-sm text-danger-600">
             {error}
           </div>
         )}
@@ -291,12 +291,12 @@ export function TasksPage() {
         {taskColumns.map((column) => (
           <article
             key={column.status}
-            className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+            className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card"
           >
-            <p className="text-sm font-medium text-slate-500">
+            <p className="text-sm font-medium text-neutral-500">
               {column.title}
             </p>
-            <p className="mt-2 text-3xl font-bold text-slate-950">
+            <p className="mt-2 text-3xl font-bold text-neutral-900">
               {tasksByStatus[column.status].length}
             </p>
           </article>
@@ -309,44 +309,44 @@ export function TasksPage() {
             <article
               key={column.status}
               className={[
-                "min-h-96 rounded-xl border border-t-4 border-slate-200 bg-white p-4 shadow-sm",
+                "min-h-96 rounded-xl border border-t-4 border-neutral-200 bg-white p-4 shadow-card",
                 column.accentClassName,
               ].join(" ")}
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h3 className="font-bold text-slate-950">{column.title}</h3>
-                  <p className="mt-1 text-xs text-slate-500">
+                  <h3 className="font-bold text-neutral-900">{column.title}</h3>
+                  <p className="mt-1 text-xs text-neutral-500">
                     {column.description}
                   </p>
                 </div>
-                <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600">
+                <span className="rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-bold text-neutral-500">
                   {tasksByStatus[column.status].length}
                 </span>
               </div>
 
               <div className="mt-4 space-y-3">
                 {isLoadingTasks ? (
-                  <div className="h-28 animate-pulse rounded-lg bg-slate-100" />
+                  <div className="h-28 animate-pulse rounded-lg bg-neutral-100" />
                 ) : tasksByStatus[column.status].length === 0 ? (
-                  <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-5 text-center text-sm text-slate-500">
+                  <div className="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 p-5 text-center text-sm text-neutral-500">
                     Sin tareas en este estado.
                   </div>
                 ) : (
                   tasksByStatus[column.status].map((task) => (
                     <article
                       key={task.id}
-                      className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm"
+                      className="rounded-lg border border-neutral-200 bg-white p-4 shadow-card"
                     >
                       <div className="flex items-start justify-between gap-3">
-                        <p className="font-semibold text-slate-950">
+                        <p className="font-semibold text-neutral-900">
                           {task.descripcion}
                         </p>
-                        <span className="rounded-full bg-slate-100 px-2 py-1 text-[11px] font-bold text-slate-600">
+                        <span className="rounded-full bg-neutral-100 px-2 py-1 text-[11px] font-bold text-neutral-500">
                           #{task.id}
                         </span>
                       </div>
-                      <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3 text-xs text-slate-500">
+                      <div className="mt-4 flex items-center justify-between border-t border-neutral-100 pt-3 text-xs text-neutral-500">
                         <span>Responsable: {task.responsableId}</span>
                         <span>{statusLabels[task.estado]}</span>
                       </div>
@@ -358,14 +358,14 @@ export function TasksPage() {
           ))}
         </section>
 
-        <aside className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-bold text-slate-950">Nueva tarea</h2>
-          <p className="mt-1 text-sm text-slate-500">
+        <aside className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
+          <h2 className="text-xl font-bold text-neutral-900">Nueva tarea</h2>
+          <p className="mt-1 text-sm text-neutral-500">
             Crea una tarea asociada al proyecto seleccionado.
           </p>
 
           {successMessage && (
-            <div className="mt-4 rounded-lg border border-emerald-100 bg-emerald-50 p-3 text-sm font-medium text-emerald-700">
+            <div className="mt-4 rounded-lg border border-success-100 bg-success-50 p-3 text-sm font-medium text-success-600">
               {successMessage}
             </div>
           )}
@@ -374,7 +374,7 @@ export function TasksPage() {
             <div>
               <label
                 htmlFor="descripcion"
-                className="text-sm font-semibold text-slate-700"
+                className="text-sm font-semibold text-neutral-700"
               >
                 Descripcion
               </label>
@@ -386,10 +386,10 @@ export function TasksPage() {
                 }
                 rows={4}
                 placeholder="Implementar validacion de formulario"
-                className="mt-1 w-full resize-none rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                className="mt-1 w-full resize-none rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
               />
               {formErrors.descripcion && (
-                <p className="mt-1 text-xs font-medium text-red-600">
+                <p className="mt-1 text-xs font-medium text-danger-600">
                   {formErrors.descripcion}
                 </p>
               )}
@@ -398,7 +398,7 @@ export function TasksPage() {
             <div>
               <label
                 htmlFor="responsableId"
-                className="text-sm font-semibold text-slate-700"
+                className="text-sm font-semibold text-neutral-700"
               >
                 Responsable ID
               </label>
@@ -410,10 +410,10 @@ export function TasksPage() {
                   updateField("responsableId", event.target.value)
                 }
                 placeholder="1"
-                className="mt-1 h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                className="mt-1 h-10 w-full rounded-lg border border-neutral-200 px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
               />
               {formErrors.responsableId && (
-                <p className="mt-1 text-xs font-medium text-red-600">
+                <p className="mt-1 text-xs font-medium text-danger-600">
                   {formErrors.responsableId}
                 </p>
               )}
@@ -422,7 +422,7 @@ export function TasksPage() {
             <div>
               <label
                 htmlFor="estado"
-                className="text-sm font-semibold text-slate-700"
+                className="text-sm font-semibold text-neutral-700"
               >
                 Estado inicial
               </label>
@@ -432,7 +432,7 @@ export function TasksPage() {
                 onChange={(event) =>
                   updateField("estado", event.target.value as TaskStatus)
                 }
-                className="mt-1 h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                className="mt-1 h-10 w-full rounded-lg border border-neutral-200 bg-white px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
               >
                 {taskColumns.map((column) => (
                   <option key={column.status} value={column.status}>
@@ -445,7 +445,7 @@ export function TasksPage() {
             <button
               type="submit"
               disabled={isSubmitting || !selectedProjectId}
-              className="w-full rounded-lg bg-cyan-500 px-4 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-lg bg-primary-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSubmitting ? "Creando..." : "Crear tarea"}
             </button>

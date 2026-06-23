@@ -43,16 +43,16 @@ export function MainLayout() {
   const pageInfo = getPageInfo(location.pathname);
 
   return (
-    <div className="min-h-screen bg-slate-100 p-4 text-slate-950 lg:p-6">
-      <div className="mx-auto flex min-h-[calc(100vh-2rem)] max-w-7xl overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm lg:min-h-[calc(100vh-3rem)]">
-        <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-white md:flex md:flex-col">
-          <div className="flex items-center gap-3 border-b border-slate-100 px-6 py-5">
-            <div className="flex size-9 items-center justify-center rounded-lg bg-slate-950 text-sm font-bold text-white">
+    <div className="min-h-screen bg-neutral-100 p-4 text-neutral-900 lg:p-6">
+      <div className="mx-auto flex min-h-[calc(100vh-2rem)] max-w-7xl overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-card lg:min-h-[calc(100vh-3rem)]">
+        <aside className="hidden w-64 shrink-0 border-r border-neutral-200 bg-white md:flex md:flex-col">
+          <div className="flex items-center gap-3 border-b border-neutral-100 px-6 py-5">
+            <div className="flex size-9 items-center justify-center rounded-lg bg-primary-600 text-sm font-bold text-white">
               I
             </div>
             <div>
               <p className="text-lg font-bold leading-tight">Innovatech</p>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
                 Solutions
               </p>
             </div>
@@ -67,8 +67,8 @@ export function MainLayout() {
                   [
                     "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold transition",
                     isActive
-                      ? "bg-cyan-400 text-slate-950"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
+                      ? "bg-primary-600 text-white"
+                      : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900",
                   ].join(" ")
                 }
               >
@@ -80,11 +80,11 @@ export function MainLayout() {
             ))}
           </nav>
 
-          <div className="border-t border-slate-100 p-4">
+          <div className="border-t border-neutral-100 p-4">
             <button
               type="button"
               onClick={logout}
-              className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950"
+              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm font-semibold text-neutral-500 transition hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-900"
             >
               Cerrar sesión
             </button>
@@ -92,13 +92,13 @@ export function MainLayout() {
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="border-b border-slate-200 bg-white px-5 py-4 lg:px-8">
+          <header className="border-b border-neutral-200 bg-white px-5 py-4 lg:px-8">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <h1 className="text-3xl font-bold tracking-tight">
                   {pageInfo.title}
                 </h1>
-                <p className="mt-1 text-sm text-slate-500">
+                <p className="mt-1 text-sm text-neutral-500">
                   {pageInfo.description}
                 </p>
               </div>
@@ -111,9 +111,9 @@ export function MainLayout() {
                   id="global-search"
                   type="search"
                   placeholder="Buscar..."
-                  className="h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 sm:w-64"
+                  className="h-10 w-full rounded-lg border border-neutral-200 bg-white px-3 text-sm outline-none transition placeholder:text-neutral-500 focus:border-accent-500 focus:ring-4 focus:ring-accent-100 sm:w-64"
                 />
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-slate-950 text-sm font-bold text-white">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-secondary-600 text-sm font-bold text-white">
                   IN
                 </div>
               </div>
@@ -128,8 +128,8 @@ export function MainLayout() {
                     [
                       "whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold transition",
                       isActive
-                        ? "bg-cyan-400 text-slate-950"
-                        : "bg-slate-100 text-slate-600",
+                        ? "bg-primary-600 text-white"
+                        : "bg-neutral-100 text-neutral-500",
                     ].join(" ")
                   }
                 >
@@ -139,7 +139,7 @@ export function MainLayout() {
             </nav>
           </header>
 
-          <main className="flex-1 overflow-auto bg-slate-50 p-5 lg:p-8">
+          <main className="flex-1 overflow-auto bg-neutral-50 p-5 lg:p-8">
             <Outlet />
           </main>
         </div>

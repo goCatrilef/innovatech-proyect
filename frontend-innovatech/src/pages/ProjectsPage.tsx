@@ -42,10 +42,10 @@ const statusLabels: Record<ProjectStatus, string> = {
 };
 
 const statusStyles: Record<ProjectStatus, string> = {
-  PLANIFICADO: "bg-blue-50 text-blue-700 ring-blue-100",
-  EN_PROGRESO: "bg-cyan-50 text-cyan-700 ring-cyan-100",
-  FINALIZADO: "bg-emerald-50 text-emerald-700 ring-emerald-100",
-  CANCELADO: "bg-red-50 text-red-700 ring-red-100",
+  PLANIFICADO: "bg-primary-50 text-primary-700 ring-primary-100",
+  EN_PROGRESO: "bg-accent-50 text-accent-600 ring-accent-100",
+  FINALIZADO: "bg-success-50 text-success-600 ring-success-100",
+  CANCELADO: "bg-danger-50 text-danger-600 ring-danger-100",
 };
 
 const isoDatePattern = /^\d{4}-\d{2}-\d{2}$/;
@@ -211,37 +211,37 @@ export function ProjectsPage() {
     <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
       <section className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-3">
-          <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-medium text-slate-500">
+          <article className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
+            <p className="text-sm font-medium text-neutral-500">
               Total proyectos
             </p>
-            <p className="mt-2 text-3xl font-bold text-slate-950">
+            <p className="mt-2 text-3xl font-bold text-neutral-900">
               {projects.length}
             </p>
           </article>
-          <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-medium text-slate-500">
+          <article className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
+            <p className="text-sm font-medium text-neutral-500">
               Proyectos activos
             </p>
-            <p className="mt-2 text-3xl font-bold text-slate-950">
+            <p className="mt-2 text-3xl font-bold text-neutral-900">
               {totalActiveProjects}
             </p>
           </article>
-          <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-sm font-medium text-slate-500">
+          <article className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
+            <p className="text-sm font-medium text-neutral-500">
               Fuente de datos
             </p>
-            <p className="mt-2 text-lg font-bold text-cyan-700">BFF</p>
+            <p className="mt-2 text-lg font-bold text-accent-600">BFF</p>
           </article>
         </div>
 
-        <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
-          <div className="flex flex-col gap-3 border-b border-slate-100 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <section className="rounded-xl border border-neutral-200 bg-white shadow-card">
+          <div className="flex flex-col gap-3 border-b border-neutral-100 p-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-xl font-bold text-slate-950">
+              <h2 className="text-xl font-bold text-neutral-900">
                 Proyectos registrados
               </h2>
-              <p className="mt-1 text-sm text-slate-500">
+              <p className="mt-1 text-sm text-neutral-500">
                 Listado obtenido desde la capa BFF de Innovatech.
               </p>
             </div>
@@ -250,28 +250,28 @@ export function ProjectsPage() {
               type="button"
               onClick={loadProjects}
               disabled={isLoading}
-              className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isLoading ? "Actualizando..." : "Actualizar"}
             </button>
           </div>
 
           {error && (
-            <div className="m-5 rounded-lg border border-red-100 bg-red-50 p-4 text-sm text-red-700">
+            <div className="m-5 rounded-lg border border-danger-100 bg-danger-50 p-4 text-sm text-danger-600">
               {error}
             </div>
           )}
 
           {isLoading ? (
             <div className="p-5">
-              <div className="h-32 animate-pulse rounded-lg bg-slate-100" />
+              <div className="h-32 animate-pulse rounded-lg bg-neutral-100" />
             </div>
           ) : projects.length === 0 ? (
             <div className="p-8 text-center">
-              <h3 className="text-lg font-semibold text-slate-800">
+              <h3 className="text-lg font-semibold text-neutral-700">
                 No hay proyectos para mostrar
               </h3>
-              <p className="mt-2 text-sm text-slate-500">
+              <p className="mt-2 text-sm text-neutral-500">
                 Cuando el BFF entregue proyectos, apareceran en este listado.
               </p>
             </div>
@@ -280,14 +280,14 @@ export function ProjectsPage() {
               {projects.map((project) => (
                 <article
                   key={project.id}
-                  className="rounded-xl border border-slate-200 p-5"
+                  className="rounded-xl border border-neutral-200 p-5"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                      <span className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
                         {project.codigo}
                       </span>
-                      <h3 className="mt-1 text-lg font-bold text-slate-950">
+                      <h3 className="mt-1 text-lg font-bold text-neutral-900">
                         {project.nombre}
                       </h3>
                     </div>
@@ -296,27 +296,27 @@ export function ProjectsPage() {
                       className={[
                         "shrink-0 rounded-full px-3 py-1 text-xs font-bold ring-1",
                         statusStyles[project.estado] ??
-                          "bg-slate-50 text-slate-700 ring-slate-100",
+                          "bg-neutral-50 text-neutral-700 ring-neutral-100",
                       ].join(" ")}
                     >
                       {statusLabels[project.estado] ?? project.estado}
                     </span>
                   </div>
 
-                  <p className="mt-3 line-clamp-2 text-sm text-slate-500">
+                  <p className="mt-3 line-clamp-2 text-sm text-neutral-500">
                     {project.descripcion || "Sin descripcion registrada."}
                   </p>
 
-                  <div className="mt-5 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4 text-sm">
+                  <div className="mt-5 grid grid-cols-2 gap-3 border-t border-neutral-100 pt-4 text-sm">
                     <div>
-                      <p className="text-slate-400">Inicio</p>
-                      <p className="font-semibold text-slate-700">
+                      <p className="text-neutral-500">Inicio</p>
+                      <p className="font-semibold text-neutral-700">
                         {formatDate(project.fechaInicio)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-slate-400">Fin</p>
-                      <p className="font-semibold text-slate-700">
+                      <p className="text-neutral-500">Fin</p>
+                      <p className="font-semibold text-neutral-700">
                         {formatDate(project.fechaFin)}
                       </p>
                     </div>
@@ -328,16 +328,16 @@ export function ProjectsPage() {
         </section>
       </section>
 
-      <aside className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+      <aside className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
         <div>
-          <h2 className="text-xl font-bold text-slate-950">Nuevo proyecto</h2>
-          <p className="mt-1 text-sm text-slate-500">
+          <h2 className="text-xl font-bold text-neutral-900">Nuevo proyecto</h2>
+          <p className="mt-1 text-sm text-neutral-500">
             Valida campos obligatorios antes de enviar al backend.
           </p>
         </div>
 
         {successMessage && (
-          <div className="mt-4 rounded-lg border border-emerald-100 bg-emerald-50 p-3 text-sm font-medium text-emerald-700">
+          <div className="mt-4 rounded-lg border border-success-100 bg-success-50 p-3 text-sm font-medium text-success-600">
             {successMessage}
           </div>
         )}
@@ -346,7 +346,7 @@ export function ProjectsPage() {
           <div>
             <label
               htmlFor="codigo"
-              className="text-sm font-semibold text-slate-700"
+              className="text-sm font-semibold text-neutral-700"
             >
               Codigo
             </label>
@@ -355,10 +355,10 @@ export function ProjectsPage() {
               value={form.codigo}
               onChange={(event) => updateField("codigo", event.target.value)}
               placeholder="PRY-001"
-              className="mt-1 h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+              className="mt-1 h-10 w-full rounded-lg border border-neutral-200 px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
             />
             {formErrors.codigo && (
-              <p className="mt-1 text-xs font-medium text-red-600">
+              <p className="mt-1 text-xs font-medium text-danger-600">
                 {formErrors.codigo}
               </p>
             )}
@@ -367,7 +367,7 @@ export function ProjectsPage() {
           <div>
             <label
               htmlFor="nombre"
-              className="text-sm font-semibold text-slate-700"
+              className="text-sm font-semibold text-neutral-700"
             >
               Nombre
             </label>
@@ -376,10 +376,10 @@ export function ProjectsPage() {
               value={form.nombre}
               onChange={(event) => updateField("nombre", event.target.value)}
               placeholder="Portal de clientes"
-              className="mt-1 h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+              className="mt-1 h-10 w-full rounded-lg border border-neutral-200 px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
             />
             {formErrors.nombre && (
-              <p className="mt-1 text-xs font-medium text-red-600">
+              <p className="mt-1 text-xs font-medium text-danger-600">
                 {formErrors.nombre}
               </p>
             )}
@@ -388,7 +388,7 @@ export function ProjectsPage() {
           <div>
             <label
               htmlFor="descripcion"
-              className="text-sm font-semibold text-slate-700"
+              className="text-sm font-semibold text-neutral-700"
             >
               Descripcion
             </label>
@@ -400,7 +400,7 @@ export function ProjectsPage() {
               }
               rows={4}
               placeholder="Describe el objetivo del proyecto"
-              className="mt-1 w-full resize-none rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+              className="mt-1 w-full resize-none rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
             />
           </div>
 
@@ -408,7 +408,7 @@ export function ProjectsPage() {
             <div>
               <label
                 htmlFor="fechaInicio"
-                className="text-sm font-semibold text-slate-700"
+                className="text-sm font-semibold text-neutral-700"
               >
                 Fecha inicio
               </label>
@@ -420,10 +420,10 @@ export function ProjectsPage() {
                   updateField("fechaInicio", event.target.value)
                 }
                 placeholder="2026-07-01"
-                className="mt-1 h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                className="mt-1 h-10 w-full rounded-lg border border-neutral-200 px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
               />
               {formErrors.fechaInicio && (
-                <p className="mt-1 text-xs font-medium text-red-600">
+                <p className="mt-1 text-xs font-medium text-danger-600">
                   {formErrors.fechaInicio}
                 </p>
               )}
@@ -432,7 +432,7 @@ export function ProjectsPage() {
             <div>
               <label
                 htmlFor="fechaFin"
-                className="text-sm font-semibold text-slate-700"
+                className="text-sm font-semibold text-neutral-700"
               >
                 Fecha fin
               </label>
@@ -444,10 +444,10 @@ export function ProjectsPage() {
                   updateField("fechaFin", event.target.value)
                 }
                 placeholder="2026-12-31"
-                className="mt-1 h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                className="mt-1 h-10 w-full rounded-lg border border-neutral-200 px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
               />
               {formErrors.fechaFin && (
-                <p className="mt-1 text-xs font-medium text-red-600">
+                <p className="mt-1 text-xs font-medium text-danger-600">
                   {formErrors.fechaFin}
                 </p>
               )}
@@ -457,7 +457,7 @@ export function ProjectsPage() {
           <div>
             <label
               htmlFor="estado"
-              className="text-sm font-semibold text-slate-700"
+              className="text-sm font-semibold text-neutral-700"
             >
               Estado
             </label>
@@ -467,7 +467,7 @@ export function ProjectsPage() {
               onChange={(event) =>
                 updateField("estado", event.target.value as ProjectStatus)
               }
-              className="mt-1 h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+              className="mt-1 h-10 w-full rounded-lg border border-neutral-200 bg-white px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
             >
               {projectStatuses.map((status) => (
                 <option key={status} value={status}>
@@ -480,7 +480,7 @@ export function ProjectsPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-lg bg-cyan-500 px-4 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
+            className="w-full rounded-lg bg-primary-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? "Creando..." : "Crear proyecto"}
           </button>

@@ -11,8 +11,8 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   if (isLoading) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-slate-50">
-        <p className="text-sm font-medium text-slate-600">
+      <main className="flex min-h-screen items-center justify-center bg-neutral-50">
+        <p className="text-sm font-medium text-neutral-500">
           Cargando autenticación...
         </p>
       </main>
@@ -21,10 +21,10 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   if (error) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
-        <section className="max-w-md rounded-xl border border-red-100 bg-white p-6 shadow-sm">
-          <p className="font-semibold text-red-600">{error}</p>
-          <p className="mt-2 text-sm text-slate-500">
+      <main className="flex min-h-screen items-center justify-center bg-neutral-50 px-4">
+        <section className="max-w-md rounded-xl border border-danger-100 bg-white p-6 shadow-card">
+          <p className="font-semibold text-danger-600">{error}</p>
+          <p className="mt-2 text-sm text-neutral-500">
             Verifica que Keycloak esté disponible y que las variables de entorno
             estén configuradas correctamente.
           </p>

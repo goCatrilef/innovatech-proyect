@@ -230,78 +230,78 @@ export function TeamPage() {
   return (
     <div className="space-y-6">
       <section className="grid gap-4 sm:grid-cols-3">
-        <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-sm font-medium text-slate-500">Total miembros</p>
-          <p className="mt-2 text-3xl font-bold text-slate-950">
+        <article className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
+          <p className="text-sm font-medium text-neutral-500">Total miembros</p>
+          <p className="mt-2 text-3xl font-bold text-neutral-900">
             {members.length}
           </p>
         </article>
-        <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-sm font-medium text-slate-500">
+        <article className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
+          <p className="text-sm font-medium text-neutral-500">
             Miembros activos
           </p>
-          <p className="mt-2 text-3xl font-bold text-slate-950">
+          <p className="mt-2 text-3xl font-bold text-neutral-900">
             {activeMembers.length}
           </p>
         </article>
-        <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-sm font-medium text-slate-500">
+        <article className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
+          <p className="text-sm font-medium text-neutral-500">
             Asignados al proyecto
           </p>
-          <p className="mt-2 text-3xl font-bold text-slate-950">
+          <p className="mt-2 text-3xl font-bold text-neutral-900">
             {projectMembers.length}
           </p>
         </article>
       </section>
 
       {error && (
-        <div className="rounded-lg border border-red-100 bg-red-50 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-danger-100 bg-danger-50 p-4 text-sm text-danger-600">
           {error}
         </div>
       )}
 
       {successMessage && (
-        <div className="rounded-lg border border-emerald-100 bg-emerald-50 p-4 text-sm font-medium text-emerald-700">
+        <div className="rounded-lg border border-success-100 bg-success-50 p-4 text-sm font-medium text-success-600">
           {successMessage}
         </div>
       )}
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
         <div className="space-y-6">
-          <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
-            <div className="border-b border-slate-100 p-5">
-              <h2 className="text-xl font-bold text-slate-950">
+          <section className="rounded-xl border border-neutral-200 bg-white shadow-card">
+            <div className="border-b border-neutral-100 p-5">
+              <h2 className="text-xl font-bold text-neutral-900">
                 Miembros registrados
               </h2>
-              <p className="mt-1 text-sm text-slate-500">
+              <p className="mt-1 text-sm text-neutral-500">
                 Listado obtenido desde el BFF.
               </p>
             </div>
 
             {isLoading ? (
               <div className="p-5">
-                <div className="h-32 animate-pulse rounded-lg bg-slate-100" />
+                <div className="h-32 animate-pulse rounded-lg bg-neutral-100" />
               </div>
             ) : members.length === 0 ? (
-              <div className="p-8 text-center text-sm text-slate-500">
+              <div className="p-8 text-center text-sm text-neutral-500">
                 No hay miembros registrados.
               </div>
             ) : (
-              <div className="divide-y divide-slate-100">
+              <div className="divide-y divide-neutral-100">
                 {members.map((member) => (
                   <article
                     key={member.id}
                     className="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between"
                   >
                     <div>
-                      <p className="font-bold text-slate-950">
+                      <p className="font-bold text-neutral-900">
                         {member.nombre}
                       </p>
-                      <p className="text-sm text-slate-500">
+                      <p className="text-sm text-neutral-500">
                         {member.identificador} - {member.rol}
                       </p>
                       {member.email && (
-                        <p className="text-sm text-slate-400">
+                        <p className="text-sm text-neutral-500">
                           {member.email}
                         </p>
                       )}
@@ -310,8 +310,8 @@ export function TeamPage() {
                       className={[
                         "w-fit rounded-full px-3 py-1 text-xs font-bold",
                         member.activo
-                          ? "bg-emerald-50 text-emerald-700"
-                          : "bg-slate-100 text-slate-500",
+                          ? "bg-success-50 text-success-600"
+                          : "bg-neutral-100 text-neutral-500",
                       ].join(" ")}
                     >
                       {member.activo ? "Activo" : "Inactivo"}
@@ -322,13 +322,13 @@ export function TeamPage() {
             )}
           </section>
 
-          <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <section className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-xl font-bold text-slate-950">
+                <h2 className="text-xl font-bold text-neutral-900">
                   Miembros por proyecto
                 </h2>
-                <p className="mt-1 text-sm text-slate-500">
+                <p className="mt-1 text-sm text-neutral-500">
                   Consulta quienes estan asociados a cada proyecto.
                 </p>
               </div>
@@ -338,7 +338,7 @@ export function TeamPage() {
                   setSelectedProjectId(Number(event.target.value))
                 }
                 disabled={projects.length === 0}
-                className="h-10 min-w-72 rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 disabled:cursor-not-allowed disabled:opacity-60"
+                className="h-10 min-w-72 rounded-lg border border-neutral-200 bg-white px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {projects.length === 0 ? (
                   <option value="">Sin proyectos disponibles</option>
@@ -353,9 +353,9 @@ export function TeamPage() {
             </div>
 
             {selectedProject && (
-              <p className="mt-4 rounded-lg bg-slate-50 p-3 text-sm text-slate-600">
+              <p className="mt-4 rounded-lg bg-neutral-50 p-3 text-sm text-neutral-500">
                 Proyecto seleccionado:{" "}
-                <span className="font-semibold text-slate-950">
+                <span className="font-semibold text-neutral-900">
                   {selectedProject.nombre}
                 </span>
               </p>
@@ -363,24 +363,24 @@ export function TeamPage() {
 
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               {isLoadingProjectMembers ? (
-                <div className="h-24 animate-pulse rounded-lg bg-slate-100" />
+                <div className="h-24 animate-pulse rounded-lg bg-neutral-100" />
               ) : projectMembers.length === 0 ? (
-                <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-5 text-center text-sm text-slate-500 md:col-span-2">
+                <div className="rounded-lg border border-dashed border-neutral-300 bg-neutral-50 p-5 text-center text-sm text-neutral-500 md:col-span-2">
                   Este proyecto aun no tiene miembros asignados.
                 </div>
               ) : (
                 projectMembers.map((assignment) => (
                   <article
                     key={assignment.id}
-                    className="rounded-lg border border-slate-200 p-4"
+                    className="rounded-lg border border-neutral-200 p-4"
                   >
-                    <p className="font-bold text-slate-950">
+                    <p className="font-bold text-neutral-900">
                       {assignment.nombreMiembro}
                     </p>
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-1 text-sm text-neutral-500">
                       {assignment.rolMiembro}
                     </p>
-                    <p className="mt-3 text-xs font-semibold text-cyan-700">
+                    <p className="mt-3 text-xs font-semibold text-accent-600">
                       Miembro #{assignment.miembroId}
                     </p>
                   </article>
@@ -391,9 +391,9 @@ export function TeamPage() {
         </div>
 
         <aside className="space-y-6">
-          <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h2 className="text-xl font-bold text-slate-950">Nuevo miembro</h2>
-            <p className="mt-1 text-sm text-slate-500">
+          <section className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
+            <h2 className="text-xl font-bold text-neutral-900">Nuevo miembro</h2>
+            <p className="mt-1 text-sm text-neutral-500">
               Registra miembros del equipo con validacion previa.
             </p>
 
@@ -401,7 +401,7 @@ export function TeamPage() {
               <div>
                 <label
                   htmlFor="identificador"
-                  className="text-sm font-semibold text-slate-700"
+                  className="text-sm font-semibold text-neutral-700"
                 >
                   Identificador
                 </label>
@@ -412,10 +412,10 @@ export function TeamPage() {
                     updateMemberField("identificador", event.target.value)
                   }
                   placeholder="USR-001"
-                  className="mt-1 h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                  className="mt-1 h-10 w-full rounded-lg border border-neutral-200 px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
                 />
                 {memberFormErrors.identificador && (
-                  <p className="mt-1 text-xs font-medium text-red-600">
+                  <p className="mt-1 text-xs font-medium text-danger-600">
                     {memberFormErrors.identificador}
                   </p>
                 )}
@@ -424,7 +424,7 @@ export function TeamPage() {
               <div>
                 <label
                   htmlFor="nombre"
-                  className="text-sm font-semibold text-slate-700"
+                  className="text-sm font-semibold text-neutral-700"
                 >
                   Nombre
                 </label>
@@ -435,10 +435,10 @@ export function TeamPage() {
                     updateMemberField("nombre", event.target.value)
                   }
                   placeholder="Gonzalo Perez"
-                  className="mt-1 h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                  className="mt-1 h-10 w-full rounded-lg border border-neutral-200 px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
                 />
                 {memberFormErrors.nombre && (
-                  <p className="mt-1 text-xs font-medium text-red-600">
+                  <p className="mt-1 text-xs font-medium text-danger-600">
                     {memberFormErrors.nombre}
                   </p>
                 )}
@@ -447,7 +447,7 @@ export function TeamPage() {
               <div>
                 <label
                   htmlFor="rol"
-                  className="text-sm font-semibold text-slate-700"
+                  className="text-sm font-semibold text-neutral-700"
                 >
                   Rol
                 </label>
@@ -458,10 +458,10 @@ export function TeamPage() {
                     updateMemberField("rol", event.target.value)
                   }
                   placeholder="Frontend Developer"
-                  className="mt-1 h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                  className="mt-1 h-10 w-full rounded-lg border border-neutral-200 px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
                 />
                 {memberFormErrors.rol && (
-                  <p className="mt-1 text-xs font-medium text-red-600">
+                  <p className="mt-1 text-xs font-medium text-danger-600">
                     {memberFormErrors.rol}
                   </p>
                 )}
@@ -470,7 +470,7 @@ export function TeamPage() {
               <div>
                 <label
                   htmlFor="email"
-                  className="text-sm font-semibold text-slate-700"
+                  className="text-sm font-semibold text-neutral-700"
                 >
                   Email
                 </label>
@@ -481,10 +481,10 @@ export function TeamPage() {
                     updateMemberField("email", event.target.value)
                   }
                   placeholder="persona@innovatech.cl"
-                  className="mt-1 h-10 w-full rounded-lg border border-slate-200 px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
+                  className="mt-1 h-10 w-full rounded-lg border border-neutral-200 px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100"
                 />
                 {memberFormErrors.email && (
-                  <p className="mt-1 text-xs font-medium text-red-600">
+                  <p className="mt-1 text-xs font-medium text-danger-600">
                     {memberFormErrors.email}
                   </p>
                 )}
@@ -493,18 +493,18 @@ export function TeamPage() {
               <button
                 type="submit"
                 disabled={isCreatingMember}
-                className="w-full rounded-lg bg-cyan-500 px-4 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-lg bg-primary-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isCreatingMember ? "Creando..." : "Crear miembro"}
               </button>
             </form>
           </section>
 
-          <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h2 className="text-xl font-bold text-slate-950">
+          <section className="rounded-xl border border-neutral-200 bg-white p-5 shadow-card">
+            <h2 className="text-xl font-bold text-neutral-900">
               Asociar a proyecto
             </h2>
-            <p className="mt-1 text-sm text-slate-500">
+            <p className="mt-1 text-sm text-neutral-500">
               Selecciona un miembro activo y el proyecto actual.
             </p>
 
@@ -512,7 +512,7 @@ export function TeamPage() {
               <div>
                 <label
                   htmlFor="member-selector"
-                  className="text-sm font-semibold text-slate-700"
+                  className="text-sm font-semibold text-neutral-700"
                 >
                   Miembro
                 </label>
@@ -523,7 +523,7 @@ export function TeamPage() {
                     setSelectedMemberId(Number(event.target.value))
                   }
                   disabled={activeMembers.length === 0}
-                  className="mt-1 h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm outline-none transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="mt-1 h-10 w-full rounded-lg border border-neutral-200 bg-white px-3 text-sm outline-none transition focus:border-accent-500 focus:ring-4 focus:ring-accent-100 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {activeMembers.length === 0 ? (
                     <option value="">Sin miembros activos</option>
@@ -541,7 +541,7 @@ export function TeamPage() {
                 type="button"
                 onClick={handleAssignMember}
                 disabled={isAssigning || !selectedMemberId || !selectedProjectId}
-                className="w-full rounded-lg bg-slate-950 px-4 py-3 text-sm font-bold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-lg bg-neutral-900 px-4 py-3 text-sm font-bold text-white transition hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isAssigning ? "Asociando..." : "Asociar miembro"}
               </button>
