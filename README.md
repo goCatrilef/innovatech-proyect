@@ -1,92 +1,137 @@
-# Frontend Innovatech
+# Innovatech Platform
 
-Frontend web de la plataforma Innovatech, desarrollado con React, TypeScript, pnpm y Tailwind CSS.
+Plataforma para la gestión de proyectos construida con arquitectura de microservicios.
 
 ## Descripción
 
-Este frontend permite interactuar con la plataforma de gestión de proyectos, tareas y equipos.
-Se autentica mediante Keycloak, consume el BFF y muestra información consolidada del sistema.
+Innovatech permite gestionar proyectos, equipos y tareas mediante una arquitectura distribuida basada en Spring Boot, Eureka, API Gateway, BFF, Keycloak y Frontend React.
 
-## Tecnologías
+El sistema separa responsabilidades por microservicio y centraliza el acceso mediante Gateway y BFF.
 
-* React
-* TypeScript
-* Vite
-* pnpm
-* Tailwind CSS
-* Axios
-* React Router DOM
-* Keycloak JS
-
-## Funcionalidades
-
-* Login con Keycloak.
-* Visualización de proyectos.
-* Creación de proyectos.
-* Gestión de tareas por proyecto.
-* Visualización de avance de tareas.
-* Consulta de miembros del equipo.
-* Asociación de miembros a proyectos.
-* Manejo de errores del backend.
-* Validación de formularios obligatorios.
-
-## Arquitectura de consumo
+## Arquitectura general
 
 ```txt
-Frontend React
-      |
-      | JWT Keycloak
-      v
+Frontend React :5173
+        |
+        | JWT Keycloak
+        v
 BFF Service :8090
-      |
-      v
+        |
+        v
 API Gateway :8080
-      |
-      ├── ms-proyectos
-      ├── ms-equipos
-      └── ms-tareas
+        |
+        ├── ms-equipos    :8081
+        ├── ms-proyectos  :8082
+        └── ms-tareas     :8083
+
+Eureka Server :8761
+Keycloak      :8085
+PostgreSQL
 ```
 
-## Variables de entorno
+## Componentes
 
-Archivo:
+| Componente            | Puerto | Responsabilidad                    |
+| --------------------- | -----: | ---------------------------------- |
+| `frontend-innovatech` |   5173 | Interfaz web                       |
+| `bff-service`         |   8090 | Adaptación de datos para frontend  |
+| `api-gateway`         |   8080 | Enrutamiento centralizado          |
+| `eureka-server`       |   8761 | Service discovery                  |
+| `ms-equipos`          |   8081 | Gestión de miembros y asignaciones |
+| `ms-proyectos`        |   8082 | Gestión de proyectos               |
+| `ms-tareas`           |   8083 | Gestión de tareas                  |
+| `keycloak`            |   8085 | Autenticación y autorización       |
+
+## Microservicios
+
+### ms-equipos
+
+Permite registrar miembros, consultarlos y asociarlos a proyectos.
+
+### ms-proyectos
+
+Permite registrar, consultar, actualizar y cambiar estado de proyectos.
+
+### ms-tareas
+
+Permite crear tareas, consultar tareas por proyecto, cambiar estado y asignar responsables.
+
+## Seguridad
+
+La seguridad se implementa con Keycloak.
+
+* Realm: `innovatech`
+* Cliente: `innovatech-frontend`
+* Roles: `ADMIN`, `PROJECT_MANAGER`, `DEVELOPER`, `USER`
+* El frontend obtiene un JWT.
+* El BFF valida el token antes de permitir acceso a endpoints protegidos.
+
+## Bases de datos
+
+Cada microservicio tiene su propia base de datos:
 
 ```txt
-.env
+ms_equipos_db
+ms_proyectos_db
+ms_tareas_db
 ```
 
-Ejemplo:
+Esta decisión mantiene autonomía de datos y bajo acoplamiento.
 
-```env
-VITE_KEYCLOAK_URL=http://localhost:8085
-VITE_KEYCLOAK_REALM=innovatech
-VITE_KEYCLOAK_CLIENT_ID=innovatech-frontend
+## Ejecución recomendada
 
-VITE_BFF_URL=http://localhost:8090
+Levantar los componentes en este orden:
+
+```txt
+1. Keycloak
+2. Eureka Server
+3. ms-proyectos
+4. ms-equipos
+5. ms-tareas
+6. API Gateway
+7. BFF Service
+8. Frontend React
 ```
 
-## Instalación
+## Comandos backend
+
+En cada servicio Spring Boot:
+
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
+## Comandos frontend
 
 ```bash
 pnpm install
-```
-
-## Ejecución
-
-```bash
 pnpm dev
 ```
 
-URL local:
+## Endpoints principales
+
+### BFF
 
 ```txt
-http://localhost:5173
+GET /api/bff/proyectos/{id}/resumen
+```
+
+### API Gateway
+
+```txt
+/api/proyectos/**
+/api/equipos/**
+/api/tareas/**
 ```
 
 ## Decisiones técnicas
 
-* El frontend consume el BFF, no los microservicios directamente.
-* Keycloak gestiona autenticación y emisión de tokens JWT.
-* Axios envía el token JWT en cada solicitud protegida.
-* Se utilizan componentes reutilizables para formularios, tarjetas, vistas y mensajes de error.
-* Se validan formularios antes de enviar datos al backend.
+* Arquitectura basada en microservicios.
+* Base de datos independiente por servicio.
+* Eureka para descubrimiento de servicios.
+* API Gateway como punto de entrada técnico.
+* BFF para adaptar respuestas al frontend.
+* Keycloak para autenticación y autorización.
+* React con pnpm para la interfaz web.
+* DTOs y validaciones para proteger contratos de entrada y salida.
