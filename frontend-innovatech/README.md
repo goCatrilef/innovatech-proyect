@@ -1,73 +1,92 @@
-# React + TypeScript + Vite
+# Frontend Innovatech
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend web de la plataforma Innovatech, desarrollado con React, TypeScript, pnpm y Tailwind CSS.
 
-Currently, two official plugins are available:
+## Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Este frontend permite interactuar con la plataforma de gestión de proyectos, tareas y equipos.
+Se autentica mediante Keycloak, consume el BFF y muestra información consolidada del sistema.
 
-## React Compiler
+## Tecnologías
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React
+* TypeScript
+* Vite
+* pnpm
+* Tailwind CSS
+* Axios
+* React Router DOM
+* Keycloak JS
 
-## Expanding the ESLint configuration
+## Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* Login con Keycloak.
+* Visualización de proyectos.
+* Creación de proyectos.
+* Gestión de tareas por proyecto.
+* Visualización de avance de tareas.
+* Consulta de miembros del equipo.
+* Asociación de miembros a proyectos.
+* Manejo de errores del backend.
+* Validación de formularios obligatorios.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Arquitectura de consumo
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```txt
+Frontend React
+      |
+      | JWT Keycloak
+      v
+BFF Service :8090
+      |
+      v
+API Gateway :8080
+      |
+      ├── ms-proyectos
+      ├── ms-equipos
+      └── ms-tareas
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Variables de entorno
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Archivo:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```txt
+.env
 ```
+
+Ejemplo:
+
+```env
+VITE_KEYCLOAK_URL=http://localhost:8085
+VITE_KEYCLOAK_REALM=innovatech
+VITE_KEYCLOAK_CLIENT_ID=innovatech-frontend
+
+VITE_BFF_URL=http://localhost:8090
+```
+
+## Instalación
+
+```bash
+pnpm install
+```
+
+## Ejecución
+
+```bash
+pnpm dev
+```
+
+URL local:
+
+```txt
+http://localhost:5173
+```
+
+## Decisiones técnicas
+
+* El frontend consume el BFF, no los microservicios directamente.
+* Keycloak gestiona autenticación y emisión de tokens JWT.
+* Axios envía el token JWT en cada solicitud protegida.
+* Se utilizan componentes reutilizables para formularios, tarjetas, vistas y mensajes de error.
+* Se validan formularios antes de enviar datos al backend.
