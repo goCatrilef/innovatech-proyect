@@ -90,7 +90,3 @@ http://localhost:5173
 * Axios envía el token JWT en cada solicitud protegida.
 * Se utilizan componentes reutilizables para formularios, tarjetas, vistas y mensajes de error.
 * Se validan formularios antes de enviar datos al backend.
-
-## Defensa breve
-
-El frontend fue desarrollado con React y pnpm, integrando autenticación con Keycloak y consumo del BFF. Permite gestionar proyectos, tareas y miembros mediante una interfaz web, manteniendo bajo acoplamiento con los microservicios internos.
