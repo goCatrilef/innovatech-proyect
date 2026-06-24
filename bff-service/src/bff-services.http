@@ -1,0 +1,24 @@
+### Resumen de proyecto desde BFF
+GET http://localhost:8090/api/bff/proyectos/1/resumen
+Accept: application/json
+
+### BFF sin token
+GET http://localhost:8090/api/bff/proyectos/1/resumen
+Accept: application/json
+
+
+@token = 
+
+### BFF con token Keycloak
+GET http://localhost:8090/api/bff/proyectos/1/resumen
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### BFF con token y rol válido
+GET http://localhost:8090/api/bff/proyectos/1/resumen
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### BFF sin token
+GET http://localhost:8090/api/bff/proyectos/1/resumen
+Accept: application/json
