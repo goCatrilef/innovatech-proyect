@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Tarea.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-tareas</a> &gt; <a href="index.source.html" class="el_package">com.innovatech.ms_tareas.entity</a> &gt; <span class="el_source">Tarea.java</span></div><h1>Tarea.java</h1><pre class="source lang-java linenums">package com.innovatech.ms_tareas.entity;
+
+import com.innovatech.ms_tareas.entity.enums.EstadoTarea;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = &quot;tareas&quot;)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Tarea {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = &quot;descripcion&quot;, nullable = false, length = 500)
+    private String descripcion;
+
+    @Column(name = &quot;proyecto_id&quot;, nullable = false)
+    private Long proyectoId;
+
+    @Column(name = &quot;responsable_id&quot;, nullable = false)
+    private Long responsableId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = &quot;estado&quot;, nullable = false, length = 30)
+    private EstadoTarea estado;
+
+    @Column(name = &quot;fecha_creacion&quot;, nullable = false, updatable = false)
+    private LocalDateTime fechaCreacion;
+
+    @Column(name = &quot;fecha_actualizacion&quot;)
+    private LocalDateTime fechaActualizacion;
+
+    @PrePersist
+    public void prePersist() {
+<span class="fc" id="L43">        this.fechaCreacion = LocalDateTime.now();</span>
+
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if (this.estado == null) {</span>
+<span class="nc" id="L46">            this.estado = EstadoTarea.PENDING;</span>
+        }
+<span class="fc" id="L48">    }</span>
+
+    @PreUpdate
+    public void preUpdate() {
+<span class="fc" id="L52">        this.fechaActualizacion = LocalDateTime.now();</span>
+<span class="fc" id="L53">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

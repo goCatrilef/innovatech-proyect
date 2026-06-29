@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TareaMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-tareas</a> &gt; <a href="index.source.html" class="el_package">com.innovatech.ms_tareas.mapper</a> &gt; <span class="el_source">TareaMapper.java</span></div><h1>TareaMapper.java</h1><pre class="source lang-java linenums">package com.innovatech.ms_tareas.mapper;
+
+import com.innovatech.ms_tareas.dto.TareaRequestDTO;
+import com.innovatech.ms_tareas.dto.TareaResponseDTO;
+import com.innovatech.ms_tareas.entity.Tarea;
+import com.innovatech.ms_tareas.entity.enums.EstadoTarea;
+import org.springframework.stereotype.Component;
+
+@Component
+<span class="fc" id="L10">public class TareaMapper {</span>
+
+    public Tarea toEntity(TareaRequestDTO dto) {
+<span class="fc" id="L13">        return Tarea.builder()</span>
+<span class="fc" id="L14">                .descripcion(dto.getDescripcion())</span>
+<span class="fc" id="L15">                .proyectoId(dto.getProyectoId())</span>
+<span class="fc" id="L16">                .responsableId(dto.getResponsableId())</span>
+<span class="fc bfc" id="L17" title="All 2 branches covered.">                .estado(dto.getEstado() != null ? dto.getEstado() : EstadoTarea.PENDING)</span>
+<span class="fc" id="L18">                .build();</span>
+    }
+
+    public TareaResponseDTO toResponseDTO(Tarea tarea) {
+<span class="fc" id="L22">        return TareaResponseDTO.builder()</span>
+<span class="fc" id="L23">                .id(tarea.getId())</span>
+<span class="fc" id="L24">                .descripcion(tarea.getDescripcion())</span>
+<span class="fc" id="L25">                .proyectoId(tarea.getProyectoId())</span>
+<span class="fc" id="L26">                .responsableId(tarea.getResponsableId())</span>
+<span class="fc" id="L27">                .estado(tarea.getEstado())</span>
+<span class="fc" id="L28">                .fechaCreacion(tarea.getFechaCreacion())</span>
+<span class="fc" id="L29">                .fechaActualizacion(tarea.getFechaActualizacion())</span>
+<span class="fc" id="L30">                .build();</span>
+    }
+
+    public void actualizarEntidad(Tarea tarea, TareaRequestDTO dto) {
+<span class="fc" id="L34">        tarea.setDescripcion(dto.getDescripcion());</span>
+<span class="fc" id="L35">        tarea.setProyectoId(dto.getProyectoId());</span>
+<span class="fc" id="L36">        tarea.setResponsableId(dto.getResponsableId());</span>
+
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (dto.getEstado() != null) {</span>
+<span class="fc" id="L39">            tarea.setEstado(dto.getEstado());</span>
+        }
+<span class="fc" id="L41">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

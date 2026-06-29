@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.innovatech.ms_tareas.mapper.TareaMapperTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in com.innovatech.ms_tareas.mapper.TareaMapperTest

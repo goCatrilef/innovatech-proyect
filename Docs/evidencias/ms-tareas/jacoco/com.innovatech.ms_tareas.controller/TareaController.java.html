@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TareaController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ms-tareas</a> &gt; <a href="index.source.html" class="el_package">com.innovatech.ms_tareas.controller</a> &gt; <span class="el_source">TareaController.java</span></div><h1>TareaController.java</h1><pre class="source lang-java linenums">package com.innovatech.ms_tareas.controller;
+
+import com.innovatech.ms_tareas.dto.AsignarResponsableRequestDTO;
+import com.innovatech.ms_tareas.dto.CambiarEstadoTareaRequestDTO;
+import com.innovatech.ms_tareas.dto.TareaRequestDTO;
+import com.innovatech.ms_tareas.dto.TareaResponseDTO;
+import com.innovatech.ms_tareas.entity.enums.EstadoTarea;
+import com.innovatech.ms_tareas.service.TareaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Validated
+@RestController
+@RequestMapping(&quot;/api/tareas&quot;)
+@RequiredArgsConstructor
+@Tag(
+        name = &quot;Gestión de Tareas&quot;,
+        description = &quot;Endpoints para administrar tareas asociadas a proyectos&quot;
+)
+public class TareaController {
+
+    private final TareaService tareaService;
+
+    @Operation(summary = &quot;Crear una nueva tarea asociada a un proyecto&quot;)
+    @PostMapping
+    public ResponseEntity&lt;TareaResponseDTO&gt; crearTarea(
+            @Valid @RequestBody TareaRequestDTO request
+    ) {
+<span class="fc" id="L39">        TareaResponseDTO response = tareaService.crearTarea(request);</span>
+<span class="fc" id="L40">        return ResponseEntity.status(HttpStatus.CREATED).body(response);</span>
+    }
+
+    @Operation(summary = &quot;Obtener tarea por ID&quot;)
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;TareaResponseDTO&gt; obtenerTareaPorId(
+            @Parameter(description = &quot;ID interno de la tarea&quot;, example = &quot;1&quot;)
+            @PathVariable
+            @Positive(message = &quot;El id de la tarea debe ser mayor a cero&quot;)
+            Long id
+    ) {
+<span class="fc" id="L51">        TareaResponseDTO response = tareaService.obtenerTareaPorId(id);</span>
+<span class="fc" id="L52">        return ResponseEntity.ok(response);</span>
+    }
+
+    @Operation(summary = &quot;Consultar tareas asociadas a un proyecto&quot;)
+    @GetMapping(&quot;/proyecto/{proyectoId}&quot;)
+    public ResponseEntity&lt;List&lt;TareaResponseDTO&gt;&gt; listarTareasPorProyecto(
+            @Parameter(description = &quot;ID del proyecto&quot;, example = &quot;1&quot;)
+            @PathVariable
+            @Positive(message = &quot;El id del proyecto debe ser mayor a cero&quot;)
+            Long proyectoId
+    ) {
+<span class="fc" id="L63">        List&lt;TareaResponseDTO&gt; response = tareaService.listarTareasPorProyecto(proyectoId);</span>
+<span class="fc" id="L64">        return ResponseEntity.ok(response);</span>
+    }
+
+    @Operation(summary = &quot;Consultar tareas por estado&quot;)
+    @GetMapping(&quot;/estado/{estado}&quot;)
+    public ResponseEntity&lt;List&lt;TareaResponseDTO&gt;&gt; listarTareasPorEstado(
+            @Parameter(description = &quot;Estado de la tarea&quot;, example = &quot;PENDING&quot;)
+            @PathVariable
+            EstadoTarea estado
+    ) {
+<span class="nc" id="L74">        List&lt;TareaResponseDTO&gt; response = tareaService.listarTareasPorEstado(estado);</span>
+<span class="nc" id="L75">        return ResponseEntity.ok(response);</span>
+    }
+
+    @Operation(summary = &quot;Consultar tareas por responsable&quot;)
+    @GetMapping(&quot;/responsable/{responsableId}&quot;)
+    public ResponseEntity&lt;List&lt;TareaResponseDTO&gt;&gt; listarTareasPorResponsable(
+            @Parameter(description = &quot;ID del responsable&quot;, example = &quot;1&quot;)
+            @PathVariable
+            @Positive(message = &quot;El id del responsable debe ser mayor a cero&quot;)
+            Long responsableId
+    ) {
+<span class="nc" id="L86">        List&lt;TareaResponseDTO&gt; response = tareaService.listarTareasPorResponsable(responsableId);</span>
+<span class="nc" id="L87">        return ResponseEntity.ok(response);</span>
+    }
+
+    @Operation(summary = &quot;Actualizar información de una tarea&quot;)
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;TareaResponseDTO&gt; actualizarTarea(
+            @Parameter(description = &quot;ID interno de la tarea&quot;, example = &quot;1&quot;)
+            @PathVariable
+            @Positive(message = &quot;El id de la tarea debe ser mayor a cero&quot;)
+            Long id,
+
+            @Valid @RequestBody TareaRequestDTO request
+    ) {
+<span class="nc" id="L100">        TareaResponseDTO response = tareaService.actualizarTarea(id, request);</span>
+<span class="nc" id="L101">        return ResponseEntity.ok(response);</span>
+    }
+
+    @Operation(summary = &quot;Cambiar estado de una tarea&quot;)
+    @PatchMapping(&quot;/{id}/estado&quot;)
+    public ResponseEntity&lt;TareaResponseDTO&gt; cambiarEstadoTarea(
+            @Parameter(description = &quot;ID interno de la tarea&quot;, example = &quot;1&quot;)
+            @PathVariable
+            @Positive(message = &quot;El id de la tarea debe ser mayor a cero&quot;)
+            Long id,
+
+            @Valid @RequestBody CambiarEstadoTareaRequestDTO request
+    ) {
+<span class="fc" id="L114">        TareaResponseDTO response = tareaService.cambiarEstadoTarea(id, request);</span>
+<span class="fc" id="L115">        return ResponseEntity.ok(response);</span>
+    }
+
+    @Operation(summary = &quot;Asignar responsable a una tarea&quot;)
+    @PatchMapping(&quot;/{id}/responsable&quot;)
+    public ResponseEntity&lt;TareaResponseDTO&gt; asignarResponsable(
+            @Parameter(description = &quot;ID interno de la tarea&quot;, example = &quot;1&quot;)
+            @PathVariable
+            @Positive(message = &quot;El id de la tarea debe ser mayor a cero&quot;)
+            Long id,
+
+            @Valid @RequestBody AsignarResponsableRequestDTO request
+    ) {
+<span class="nc" id="L128">        TareaResponseDTO response = tareaService.asignarResponsable(id, request);</span>
+<span class="nc" id="L129">        return ResponseEntity.ok(response);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

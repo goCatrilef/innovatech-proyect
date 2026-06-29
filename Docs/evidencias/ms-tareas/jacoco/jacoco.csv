@@ -1,0 +1,11 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+ms-tareas,com.innovatech.ms_tareas.exception,IntegracionProyectoException,4,0,0,0,2,0,1,0,1,0
+ms-tareas,com.innovatech.ms_tareas.exception,GlobalExceptionHandler,147,95,0,0,38,30,5,6,5,6
+ms-tareas,com.innovatech.ms_tareas.exception,RecursoNoEncontradoException,0,4,0,0,0,2,0,1,0,1
+ms-tareas,com.innovatech.ms_tareas.exception,ReglaNegocioException,0,4,0,0,0,2,0,1,0,1
+ms-tareas,com.innovatech.ms_tareas.entity,Tarea,3,11,1,1,1,5,1,2,0,2
+ms-tareas,com.innovatech.ms_tareas.entity.enums,EstadoTarea,0,21,0,0,0,4,0,1,0,1
+ms-tareas,com.innovatech.ms_tareas.client.proyecto,ProyectoClientFacadeImpl,40,0,4,0,10,0,3,0,1,0
+ms-tareas,com.innovatech.ms_tareas.controller,TareaController,34,35,0,0,8,8,4,4,4,4
+ms-tareas,com.innovatech.ms_tareas.service.impl,TareaServiceImpl,54,220,9,19,11,54,8,20,1,13
+ms-tareas,com.innovatech.ms_tareas.mapper,TareaMapper,0,67,0,4,0,22,0,6,0,4
