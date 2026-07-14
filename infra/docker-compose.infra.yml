@@ -1,0 +1,81 @@
+name: innovatech-infra
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: innovatech-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: postgres
+      TZ: America/Santiago
+    ports:
+      # Puerto temporal para no interferir con PostgreSQL local en 5433.
+      - "15433:5432"
+    volumes:
+      - innovatech-postgres-data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+    networks:
+      - innovatech-network
+
+  keycloak:
+    build:
+      context: ./keycloak
+    image: innovatech/keycloak:1.0.0
+    container_name: innovatech-keycloak
+    restart: unless-stopped
+    command:
+      - start-dev
+      - --import-realm
+      - --spi-theme-cache-themes=false
+      - --spi-theme-cache-templates=false
+      - --spi-theme-static-max-age=-1
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_PORT: 5432
+      KC_DB_URL_DATABASE: keycloak_db
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_HEALTH_ENABLED: "true"
+      KC_METRICS_ENABLED: "true"
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT: "false"
+      TZ: America/Santiago
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8085:8080"
+      # Puerto de administración/health; no debe exponerse públicamente en cloud.
+      - "19000:9000"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          bash -c "{ printf 'HEAD /health/ready HTTP/1.0\r\n\r\n' >&0;
+          grep 'HTTP/1.0 200'; } 0<>/dev/tcp/127.0.0.1/9000"
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+    networks:
+      - innovatech-network
+
+volumes:
+  innovatech-postgres-data:
+    name: innovatech-postgres-data
+
+networks:
+  innovatech-network:
+    name: innovatech-network
+    driver: bridge
