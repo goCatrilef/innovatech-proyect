@@ -1,0 +1,18 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Debe coincidir con el claim "iss" del token emitido al navegador.
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8085/realms/innovatech}
+          # Dirección interna desde el contenedor para descargar las claves públicas.
+          jwk-set-uri: ${KEYCLOAK_JWK_SET_URI:http://host.docker.internal:8085/realms/innovatech/protocol/openid-connect/certs}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://eureka-server:8761/eureka/}
+
+app:
+  api-gateway:
+    url: ${API_GATEWAY_URL:http://api-gateway:8080}
