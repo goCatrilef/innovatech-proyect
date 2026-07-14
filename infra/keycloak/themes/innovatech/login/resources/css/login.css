@@ -1,0 +1,464 @@
+:root {
+  --innovatech-bg: #070b16;
+  --innovatech-surface: rgba(10, 16, 32, 0.92);
+  --innovatech-surface-strong: rgba(15, 23, 42, 0.96);
+  --innovatech-surface-muted: rgba(30, 41, 59, 0.78);
+  --innovatech-border: rgba(148, 163, 184, 0.22);
+  --innovatech-border-strong: rgba(148, 163, 184, 0.38);
+  --innovatech-primary: #7e14ff;
+  --innovatech-primary-strong: #5b21b6;
+  --innovatech-accent: #47bfff;
+  --innovatech-success: #2dd4bf;
+  --innovatech-danger: #fb7185;
+  --innovatech-warning: #fbbf24;
+  --innovatech-text: #f8fafc;
+  --innovatech-text-soft: #dbeafe;
+  --innovatech-muted: #9aa8bd;
+  --innovatech-placeholder: #64748b;
+  --innovatech-input: rgba(15, 23, 42, 0.8);
+  --innovatech-focus: rgba(71, 191, 255, 0.22);
+  --innovatech-shadow: 0 28px 90px rgba(2, 6, 23, 0.56);
+  --innovatech-radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+.login-pf,
+.login-pf body {
+  min-height: 100%;
+}
+
+.login-pf body,
+body.kcBodyClass {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 19% 18%, rgba(126, 20, 255, 0.24), transparent 30%),
+    radial-gradient(circle at 82% 16%, rgba(71, 191, 255, 0.16), transparent 28%),
+    linear-gradient(135deg, #070b16 0%, #101827 54%, #0c1727 100%);
+  background-attachment: fixed;
+  color: var(--innovatech-text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0;
+}
+
+.login-pf-page,
+.pf-v5-c-login,
+.pf-c-login {
+  min-height: 100vh;
+}
+
+.login-pf-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.25rem, 4vw, 3rem) 1rem;
+}
+
+#kc-header,
+.pf-v5-c-login__header,
+.pf-c-login__header {
+  margin: 0 0 1.45rem;
+  text-align: center;
+}
+
+#kc-header-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  min-height: 48px;
+  color: transparent;
+  font-size: 0;
+  letter-spacing: 0;
+  line-height: 1;
+  text-shadow: none;
+  text-transform: none;
+}
+
+#kc-header-wrapper::before {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  content: "";
+  background: url("../img/innovatech-mark.svg") center / contain no-repeat;
+  filter: drop-shadow(0 12px 22px rgba(126, 20, 255, 0.35));
+}
+
+#kc-header-wrapper::after {
+  content: "INNOVATECH";
+  color: var(--innovatech-text);
+  font-size: clamp(1.35rem, 3.8vw, 1.72rem);
+  font-weight: 850;
+  letter-spacing: 0.14em;
+}
+
+.card-pf,
+.pf-v5-c-login__main,
+.pf-c-login__main {
+  width: min(100%, 450px);
+  margin: 0 auto;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 28%),
+    var(--innovatech-surface);
+  border: 1px solid var(--innovatech-border);
+  border-radius: var(--innovatech-radius);
+  box-shadow: var(--innovatech-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.card-pf {
+  padding: clamp(1.4rem, 4vw, 2rem);
+}
+
+.pf-v5-c-login__main-header,
+.pf-c-login__main-header,
+.pf-v5-c-login__main-body,
+.pf-c-login__main-body,
+.pf-v5-c-login__main-footer,
+.pf-c-login__main-footer {
+  background: transparent;
+}
+
+#kc-page-title,
+.login-pf-header h1 {
+  margin: 0 0 1.45rem;
+  color: var(--innovatech-text);
+  font-size: clamp(1.35rem, 3.8vw, 1.62rem);
+  font-weight: 760;
+  line-height: 1.2;
+  text-align: center;
+}
+
+#kc-content,
+#kc-content-wrapper,
+#kc-form,
+#kc-form-wrapper {
+  width: 100%;
+}
+
+#kc-form-wrapper .form-group,
+.pf-v5-c-form__group,
+.pf-c-form__group {
+  margin-bottom: 1rem;
+}
+
+#kc-form-wrapper label,
+.pf-v5-c-form__label,
+.pf-c-form__label,
+.pf-v5-c-form__label-text,
+.pf-c-form__label-text {
+  margin-bottom: 0.35rem;
+  color: var(--innovatech-text-soft);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.form-control,
+.pf-v5-c-form-control,
+.pf-c-form-control,
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.72rem 0.9rem;
+  background: var(--innovatech-input) !important;
+  border: 1px solid var(--innovatech-border-strong) !important;
+  border-radius: 10px !important;
+  color: var(--innovatech-text) !important;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.form-control:hover,
+.pf-v5-c-form-control:hover,
+.pf-c-form-control:hover,
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover {
+  border-color: rgba(203, 213, 225, 0.5) !important;
+}
+
+.form-control:focus,
+.pf-v5-c-form-control:focus,
+.pf-c-form-control:focus,
+input:focus {
+  background: var(--innovatech-surface-strong) !important;
+  border-color: var(--innovatech-accent) !important;
+  box-shadow: 0 0 0 3px var(--innovatech-focus) !important;
+  outline: none;
+}
+
+input::placeholder {
+  color: var(--innovatech-placeholder) !important;
+}
+
+.input-group,
+.pf-v5-c-input-group,
+.pf-c-input-group {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  border-radius: 10px;
+}
+
+.input-group .form-control,
+.pf-v5-c-input-group .pf-v5-c-form-control,
+.pf-c-input-group .pf-c-form-control,
+.pf-v5-c-input-group input,
+.pf-c-input-group input {
+  min-width: 0;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.input-group .btn,
+.input-group button,
+.pf-v5-c-input-group .pf-v5-c-button,
+.pf-c-input-group .pf-c-button,
+button[aria-label*="password" i],
+button[aria-label*="contrase" i] {
+  min-width: 46px;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--innovatech-surface-muted) !important;
+  border: 1px solid var(--innovatech-border-strong) !important;
+  border-left: 0 !important;
+  border-radius: 0 10px 10px 0 !important;
+  color: var(--innovatech-text) !important;
+  box-shadow: none !important;
+}
+
+.input-group .btn:hover,
+.input-group button:hover,
+.pf-v5-c-input-group .pf-v5-c-button:hover,
+.pf-c-input-group .pf-c-button:hover,
+button[aria-label*="password" i]:hover,
+button[aria-label*="contrase" i]:hover {
+  background: rgba(51, 65, 85, 0.92) !important;
+  color: var(--innovatech-accent) !important;
+}
+
+.input-group:focus-within,
+.pf-v5-c-input-group:focus-within,
+.pf-c-input-group:focus-within {
+  border-radius: 10px;
+  box-shadow: 0 0 0 3px var(--innovatech-focus);
+}
+
+.input-group:focus-within .form-control,
+.pf-v5-c-input-group:focus-within .pf-v5-c-form-control,
+.pf-c-input-group:focus-within .pf-c-form-control,
+.input-group:focus-within .btn,
+.input-group:focus-within button,
+.pf-v5-c-input-group:focus-within .pf-v5-c-button,
+.pf-c-input-group:focus-within .pf-c-button {
+  border-color: var(--innovatech-accent) !important;
+  box-shadow: none !important;
+}
+
+#kc-form-options,
+#kc-form-buttons {
+  margin-top: 1.1rem;
+}
+
+#kc-form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  color: var(--innovatech-muted) !important;
+  font-size: 0.82rem;
+}
+
+#kc-form-options .checkbox,
+#kc-form-options label {
+  margin: 0;
+}
+
+#kc-form-options input[type="checkbox"],
+.pf-v5-c-check__input,
+.pf-c-check__input {
+  width: 16px;
+  height: 16px;
+  margin: 0 0.45rem 0 0;
+  accent-color: var(--innovatech-primary);
+  vertical-align: -3px;
+}
+
+a,
+#kc-form-options a,
+#kc-registration a,
+#kc-reset-password-form a,
+.pf-v5-c-button.pf-m-link,
+.pf-c-button.pf-m-link {
+  color: var(--innovatech-accent) !important;
+  font-weight: 650;
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+a:hover,
+#kc-form-options a:hover,
+#kc-registration a:hover,
+#kc-reset-password-form a:hover,
+.pf-v5-c-button.pf-m-link:hover,
+.pf-c-button.pf-m-link:hover {
+  color: #8bd8ff !important;
+  text-decoration: underline;
+}
+
+.btn-primary,
+.pf-v5-c-button.pf-m-primary,
+.pf-c-button.pf-m-primary,
+#kc-login {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.78rem 1rem;
+  background: linear-gradient(135deg, var(--innovatech-primary), var(--innovatech-primary-strong)) !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 14px 30px rgba(126, 20, 255, 0.28);
+  color: #fff !important;
+  font-weight: 800;
+  line-height: 1;
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.btn-primary:hover,
+.pf-v5-c-button.pf-m-primary:hover,
+.pf-c-button.pf-m-primary:hover,
+#kc-login:hover {
+  box-shadow: 0 18px 38px rgba(126, 20, 255, 0.38);
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active,
+.pf-v5-c-button.pf-m-primary:active,
+.pf-c-button.pf-m-primary:active,
+#kc-login:active {
+  transform: translateY(0);
+}
+
+#kc-info,
+#kc-registration,
+#kc-registration-container {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#kc-info-wrapper,
+#kc-registration,
+.subtitle,
+.instruction,
+.pf-v5-c-helper-text,
+.pf-c-helper-text {
+  color: var(--innovatech-muted) !important;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.alert,
+.pf-v5-c-alert,
+.pf-c-alert {
+  margin-bottom: 1.15rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.alert-error,
+.pf-v5-c-alert.pf-m-danger,
+.pf-c-alert.pf-m-danger {
+  background: rgba(127, 29, 29, 0.48);
+  border-color: rgba(251, 113, 133, 0.48);
+  color: #ffe4e6;
+}
+
+.alert-success,
+.pf-v5-c-alert.pf-m-success,
+.pf-c-alert.pf-m-success {
+  background: rgba(20, 83, 75, 0.42);
+  border-color: rgba(45, 212, 191, 0.42);
+  color: #ccfbf1;
+}
+
+.alert-warning,
+.pf-v5-c-alert.pf-m-warning,
+.pf-c-alert.pf-m-warning {
+  background: rgba(113, 63, 18, 0.42);
+  border-color: rgba(251, 191, 36, 0.42);
+  color: #fef3c7;
+}
+
+.pf-v5-c-form__helper-text,
+.pf-c-form__helper-text,
+.help-block {
+  margin-top: 0.4rem;
+  color: var(--innovatech-muted) !important;
+}
+
+.pf-m-error,
+.has-error .control-label,
+.has-error .help-block,
+.pf-v5-c-helper-text__item.pf-m-error,
+.pf-c-helper-text__item.pf-m-error {
+  color: #fecdd3 !important;
+}
+
+.has-error .form-control,
+.pf-v5-c-form-control[aria-invalid="true"],
+.pf-c-form-control[aria-invalid="true"],
+input[aria-invalid="true"] {
+  border-color: var(--innovatech-danger) !important;
+  box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.16) !important;
+}
+
+hr,
+.pf-v5-c-divider,
+.pf-c-divider {
+  border-color: rgba(148, 163, 184, 0.16);
+}
+
+@media (max-width: 600px) {
+  .login-pf-page {
+    justify-content: flex-start;
+    padding-top: 1.25rem;
+  }
+
+  #kc-header {
+    margin-bottom: 1.1rem;
+  }
+
+  #kc-header-wrapper {
+    gap: 0.65rem;
+  }
+
+  #kc-header-wrapper::before {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-pf,
+  .pf-v5-c-login__main,
+  .pf-c-login__main {
+    border-radius: 14px;
+  }
+
+  #kc-form-options {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
