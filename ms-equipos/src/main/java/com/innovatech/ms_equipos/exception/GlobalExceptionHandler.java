@@ -8,13 +8,31 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+        @ExceptionHandler(NoResourceFoundException.class)
+        public ResponseEntity<ErrorResponse> manejarRutaNoEncontrada(
+                        NoResourceFoundException ex,
+                        HttpServletRequest request) {
+                ErrorResponse error = ErrorResponse.builder()
+                                .status(HttpStatus.NOT_FOUND.value())
+                                .error(HttpStatus.NOT_FOUND.getReasonPhrase())
+                                .message("La ruta solicitada no existe")
+                                .path(request.getRequestURI())
+                                .timestamp(LocalDateTime.now())
+                                .build();
+
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
 
         @ExceptionHandler(RecursoNoEncontradoException.class)
         public ResponseEntity<ErrorResponse> manejarRecursoNoEncontrado(
@@ -107,6 +125,12 @@ public class GlobalExceptionHandler {
         public ResponseEntity<ErrorResponse> manejarErrorGeneral(
                         Exception ex,
                         HttpServletRequest request) {
+                log.error(
+                                "Error no controlado en {} {}",
+                                request.getMethod(),
+                                request.getRequestURI(),
+                                ex);
+
                 ErrorResponse error = ErrorResponse.builder()
                                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                                 .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
@@ -116,20 +140,5 @@ public class GlobalExceptionHandler {
                                 .build();
 
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
-        }
-
-        @ExceptionHandler(IntegracionProyectoException.class)
-        public ResponseEntity<ErrorResponse> manejarErrorIntegracionProyecto(
-                        IntegracionProyectoException ex,
-                        HttpServletRequest request) {
-                ErrorResponse error = ErrorResponse.builder()
-                                .status(HttpStatus.SERVICE_UNAVAILABLE.value())
-                                .error(HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase())
-                                .message(ex.getMessage())
-                                .path(request.getRequestURI())
-                                .timestamp(LocalDateTime.now())
-                                .build();
-
-                return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(error);
         }
 }
